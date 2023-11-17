@@ -1,0 +1,93 @@
+package com.techpalle.main13;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Arrays;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/readdata")
+public class ReadData extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		
+	}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		//Read Name,Email,Subject,Gender,State from browser
+		// How i'm able to use the request variable
+		// Because the variable declare in method header
+		String n=request.getParameter("tbname");
+		String e=request.getParameter("tbemail");
+		String[] s=request.getParameterValues("chksub");
+		String g=request.getParameter("rdgender");
+		String l=request.getParameter("ddlstates");
+		
+		// Display the data in Browser
+		PrintWriter pw=response.getWriter();
+		pw.append("<h1>Welcome<h1>");
+		pw.append("<h2>Name: "+n+"<h1>");
+		pw.append("<h2>Email: "+e+"<h1>");
+		pw.append("<h2>Subject: "+Arrays.deepToString(s)+"<h1>");
+		pw.append("<h2>Gender: "+g+"<h1>");
+		pw.append("<h2>State: "+l+"<h1>");
+		
+		
+		
+	}
+
+}
+
+
+//HTML Code
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HTML Assignment</title>
+</head>
+<body>
+	<form action="readdata" method="post">
+		
+		<h1>Display Details:</h1>
+		
+		<label for="tbname">Enter Your Name: </label> 
+		<input type="text"  id="tbname" name="tbname">
+		<br>
+		
+	<label for="tbemail">Enter Your Email:</label> 
+	<input type="email"  id="tbemail" name="tbemail">
+		<br>
+		
+	<label for="chksub">Select Sub:</label>            
+	              <input type="checkbox" class="chksub" name="chksub" value="B.tech"><span>B.Tech</span>
+		          <input type="checkbox" class="chksub" name="chksub" value="M.tech"><span>M.Tech</span>
+		          <input type="checkbox" class="chksub" name="chksub" value="MCA"><span>MCA</span>
+		  <br>        
+	 <label for="rdgender">Select Gender: </label> 
+	                 <input type="radio" class="rdgender" name="rdgender" value="Male"><span>Male</span>
+	                 <input type="radio" class="rdgender" name="rdgender" value="Female"><span>Female</span>
+                     <input type="radio" class="rdgender" name="rdgender" value="Others"><span>Others</span>
+         <br>
+        <label> Select Current Location:</label>
+              <select id="ddlstates" name="ddlstates">
+			 <option value="none">--Select--</option>
+			 <option value="Andhra Pradesh">--Andhra Pradesh--</option>
+			 <option value="Karnataka">--Karnataka--</option>
+			 <option value="TamilNadu">--TamilNadu--</option>
+		 </select> <br>
+		 <input type="submit" name="tbsend" value="send">       		          
+	</form>
+
+</body>
+</html>
